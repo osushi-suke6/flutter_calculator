@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_calculator/ui/calculator_buttons.dart';
 import 'package:flutter_calculator/view_models/calculator_view_model.dart';
 import 'package:provider/provider.dart';
 
@@ -10,18 +11,24 @@ class CalculatorView extends StatelessWidget {
     builder: (context, _) {
       final viewModel = context.watch<CalculatorViewModel>();
 
-      void onPressed() {
-        viewModel.calculate();
-      }
+      final display = Container(
+        alignment: Alignment.centerRight,
+        width: 400,
+        height: 100,
+        padding: const EdgeInsets.symmetric(horizontal: 25),
+        child: Text(
+          viewModel.result,
+          style: const TextStyle(color: Colors.white, fontSize: 64),
+        ),
+      );
+
+      final buttons = CalculatorButtons(viewModel: viewModel);
 
       return Center(
         child: Column(
           children: [
-            Text(viewModel.result),
-            OutlinedButton(
-              onPressed: onPressed,
-              child: const Text('calculate!'),
-            ),
+            display,
+            buttons,
           ],
         ),
       );
@@ -31,6 +38,7 @@ class CalculatorView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black54,
       appBar: AppBar(
         backgroundColor: Colors.black54,
       ),
