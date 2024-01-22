@@ -10,4 +10,9 @@ class CalculatorViewModel extends ChangeNotifier {
     _model.calculate();
     notifyListeners();
   }
+
+  void buttonPressed(String button) {
+    _model.buttonPressed(button);
+    notifyListeners();
+  }
 }
