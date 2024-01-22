@@ -19,7 +19,7 @@ class CalculatorButton extends StatelessWidget {
       height: text == '=' ? 200 : 100,
       padding: const EdgeInsets.all(5),
       child: OutlinedButton(
-        onPressed: null,
+        onPressed: onPressed,
         style: OutlinedButton.styleFrom(
           backgroundColor: bgColor,
           shape: const RoundedRectangleBorder(
