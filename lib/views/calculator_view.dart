@@ -22,11 +22,7 @@ class CalculatorView extends StatelessWidget {
         ),
       );
 
-      const buttons = CalculatorButtons();
-
-      void onPressed() {
-        viewModel.calculate();
-      }
+      final buttons = CalculatorButtons(viewModel: viewModel);
 
       return Center(
         child: Column(

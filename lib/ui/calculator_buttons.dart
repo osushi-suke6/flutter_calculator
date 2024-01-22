@@ -1,33 +1,45 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_calculator/ui/calculator_button.dart';
+import 'package:flutter_calculator/utils/calculator_button_type.dart';
+import 'package:flutter_calculator/view_models/calculator_view_model.dart';
 
 class CalculatorButtons extends StatelessWidget {
   const CalculatorButtons({
+    required this.viewModel,
     super.key,
   });
 
+  final CalculatorViewModel viewModel;
+
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CalculatorButton(
-              text: 'AC',
+              buttonType: CalculatorButtonType.ac,
               bgColor: Colors.white10,
+              onPressed: () => viewModel.buttonPressed(CalculatorButtonType.ac),
             ),
             CalculatorButton(
-              text: '%',
+              buttonType: CalculatorButtonType.percent,
               bgColor: Colors.white10,
+              onPressed: () =>
+                  viewModel.buttonPressed(CalculatorButtonType.percent),
             ),
             CalculatorButton(
-              text: '÷',
+              buttonType: CalculatorButtonType.divide,
               bgColor: Colors.white10,
+              onPressed: () =>
+                  viewModel.buttonPressed(CalculatorButtonType.divide),
             ),
             CalculatorButton(
-              text: '×',
+              buttonType: CalculatorButtonType.multiply,
               bgColor: Colors.white10,
+              onPressed: () =>
+                  viewModel.buttonPressed(CalculatorButtonType.multiply),
             ),
           ],
         ),
@@ -35,20 +47,28 @@ class CalculatorButtons extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CalculatorButton(
-              text: '7',
+              buttonType: CalculatorButtonType.seven,
               bgColor: Colors.white24,
+              onPressed: () =>
+                  viewModel.buttonPressed(CalculatorButtonType.seven),
             ),
             CalculatorButton(
-              text: '8',
+              buttonType: CalculatorButtonType.eight,
               bgColor: Colors.white24,
+              onPressed: () =>
+                  viewModel.buttonPressed(CalculatorButtonType.eight),
             ),
             CalculatorButton(
-              text: '9',
+              buttonType: CalculatorButtonType.nine,
               bgColor: Colors.white24,
+              onPressed: () =>
+                  viewModel.buttonPressed(CalculatorButtonType.nine),
             ),
             CalculatorButton(
-              text: '-',
+              buttonType: CalculatorButtonType.subtract,
               bgColor: Colors.white10,
+              onPressed: () =>
+                  viewModel.buttonPressed(CalculatorButtonType.subtract),
             ),
           ],
         ),
@@ -56,20 +76,28 @@ class CalculatorButtons extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CalculatorButton(
-              text: '4',
+              buttonType: CalculatorButtonType.four,
               bgColor: Colors.white24,
+              onPressed: () =>
+                  viewModel.buttonPressed(CalculatorButtonType.four),
             ),
             CalculatorButton(
-              text: '5',
+              buttonType: CalculatorButtonType.five,
               bgColor: Colors.white24,
+              onPressed: () =>
+                  viewModel.buttonPressed(CalculatorButtonType.five),
             ),
             CalculatorButton(
-              text: '6',
+              buttonType: CalculatorButtonType.six,
               bgColor: Colors.white24,
+              onPressed: () =>
+                  viewModel.buttonPressed(CalculatorButtonType.six),
             ),
             CalculatorButton(
-              text: '+',
+              buttonType: CalculatorButtonType.add,
               bgColor: Colors.white10,
+              onPressed: () =>
+                  viewModel.buttonPressed(CalculatorButtonType.add),
             ),
           ],
         ),
@@ -81,40 +109,54 @@ class CalculatorButtons extends StatelessWidget {
                 Row(
                   children: [
                     CalculatorButton(
-                      text: '1',
+                      buttonType: CalculatorButtonType.one,
                       bgColor: Colors.white24,
+                      onPressed: () =>
+                          viewModel.buttonPressed(CalculatorButtonType.one),
                     ),
                     CalculatorButton(
-                      text: '2',
+                      buttonType: CalculatorButtonType.two,
                       bgColor: Colors.white24,
+                      onPressed: () =>
+                          viewModel.buttonPressed(CalculatorButtonType.two),
                     ),
                     CalculatorButton(
-                      text: '3',
+                      buttonType: CalculatorButtonType.three,
                       bgColor: Colors.white24,
+                      onPressed: () =>
+                          viewModel.buttonPressed(CalculatorButtonType.three),
                     ),
                   ],
                 ),
                 Row(
                   children: [
                     CalculatorButton(
-                      text: '+/-',
+                      buttonType: CalculatorButtonType.plusOrMinus,
                       bgColor: Colors.white24,
+                      onPressed: () => viewModel
+                          .buttonPressed(CalculatorButtonType.plusOrMinus),
                     ),
                     CalculatorButton(
-                      text: '0',
+                      buttonType: CalculatorButtonType.zero,
                       bgColor: Colors.white24,
+                      onPressed: () =>
+                          viewModel.buttonPressed(CalculatorButtonType.zero),
                     ),
                     CalculatorButton(
-                      text: '.',
+                      buttonType: CalculatorButtonType.dot,
                       bgColor: Colors.white24,
+                      onPressed: () =>
+                          viewModel.buttonPressed(CalculatorButtonType.dot),
                     ),
                   ],
                 ),
               ],
             ),
             CalculatorButton(
-              text: '=',
+              buttonType: CalculatorButtonType.equal,
               bgColor: Colors.orange,
+              onPressed: () =>
+                  viewModel.buttonPressed(CalculatorButtonType.equal),
             ),
           ],
         ),
