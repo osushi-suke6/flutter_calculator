@@ -5,15 +5,11 @@ import 'package:flutter_calculator/utils/calculator_button_type.dart';
 class CalculatorViewModel extends ChangeNotifier {
   final CalculatorModel _model = CalculatorModel();
 
-  String get result => _model.result;
-
-  void calculate() {
-    _model.calculate();
-    notifyListeners();
-  }
+  String get display => _model.display;
+  String get subDisplay => _model.subDisplay;
 
   void buttonPressed(CalculatorButtonType buttonType) {
-    _model.buttonPressed(buttonType);
+    _model.onPressed(buttonType);
     notifyListeners();
   }
 }
