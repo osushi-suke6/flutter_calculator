@@ -106,6 +106,21 @@ void main() {
         expect(calculator.display, '2');
         expect(calculator.subDisplay, '0.2/0.1=');
       });
+
+      test('The display should show ERROR on Division by zero', () {
+        calculator
+          ..onPressed(CalculatorButtonType.ac)
+          ..onPressed(CalculatorButtonType.zero)
+          ..onPressed(CalculatorButtonType.dot)
+          ..onPressed(CalculatorButtonType.two)
+          ..onPressed(CalculatorButtonType.divide)
+          ..onPressed(CalculatorButtonType.zero)
+          ..onPressed(CalculatorButtonType.equal);
+
+        expect(calculator.isError, true);
+        expect(calculator.display, 'ERROR');
+        expect(calculator.subDisplay, '0.2/0=');
+      });
     });
 
     group('AC test', () {
