@@ -128,7 +128,7 @@ void main() {
         expect(model.subDisplay, '0.2/0.1=');
       });
 
-      test('The display should show ERROR on Division by zero', () {
+      test('The display should show ERROR on division by zero', () {
         final model = CalculatorModel()
           ..onPressed(CalculatorButtonType.zero)
           ..onPressed(CalculatorButtonType.dot)
