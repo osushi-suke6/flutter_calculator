@@ -16,7 +16,7 @@ class CalculatorModel {
   String get display => isError ? 'ERROR' : _result;
   String get subDisplay =>
       _operator.isEmpty ? '' : _operand1 + _operator + _operand2 + _equal;
-  bool get isError => _isErorr;
+  bool get isError => _isError;
 
   void onPressed(CalculatorButtonType buttonType) {
     _lastPressed = buttonType;
