@@ -13,7 +13,7 @@ class CalculatorModel {
   bool get _isEqualed => _lastPressed == CalculatorButtonType.equal;
   String get _operator => _operatorType?.text ?? '';
   String get _equal => _isEqualed ? '=' : '';
-  String get display => isError ? 'ERROR' : _result;
+  String get display => _isError ? 'ERROR' : _result;
   String get subDisplay =>
       _operator.isEmpty ? '' : _operand1 + _operator + _operand2 + _equal;
   bool get isError => _isError;
