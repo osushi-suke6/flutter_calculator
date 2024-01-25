@@ -4,21 +4,50 @@ import 'package:test/test.dart';
 
 void main() {
   group('Test CalculatorModel', () {
-    test('Numeric input test', () {
-      final model = CalculatorModel()
-        ..onPressed(CalculatorButtonType.one)
-        ..onPressed(CalculatorButtonType.two)
-        ..onPressed(CalculatorButtonType.three)
-        ..onPressed(CalculatorButtonType.four)
-        ..onPressed(CalculatorButtonType.five)
-        ..onPressed(CalculatorButtonType.six)
-        ..onPressed(CalculatorButtonType.seven)
-        ..onPressed(CalculatorButtonType.eight)
-        ..onPressed(CalculatorButtonType.nine)
-        ..onPressed(CalculatorButtonType.zero);
+    group('Numeric input test', () {
+      test('Numeric input should update display if no operator is set', () {
+        final model = CalculatorModel()..onPressed(CalculatorButtonType.one);
 
-      expect(model.display, '1234567890');
-      expect(model.subDisplay, '');
+        expect(model.display, '1');
+      });
+
+      test('Numeric input should append to display if it is not "0"', () {
+        final model = CalculatorModel()
+          ..onPressed(CalculatorButtonType.one)
+          ..onPressed(CalculatorButtonType.two);
+
+        expect(model.display, '12');
+      });
+
+      test('Numeric input should replace display if it is "0"', () {
+        final model = CalculatorModel()
+          ..onPressed(CalculatorButtonType.zero)
+          ..onPressed(CalculatorButtonType.one);
+
+        expect(model.display, '1');
+      });
+
+      test('Numeric input should update subDisplay if an operator is set', () {
+        final model = CalculatorModel()
+          ..onPressed(CalculatorButtonType.one)
+          ..onPressed(CalculatorButtonType.add)
+          ..onPressed(CalculatorButtonType.two);
+
+        expect(model.subDisplay, '1+');
+        expect(model.display, '2');
+      });
+
+      test('Numeric input should reset display if result is displayed', () {
+        final model = CalculatorModel()
+          ..onPressed(CalculatorButtonType.one)
+          ..onPressed(CalculatorButtonType.add)
+          ..onPressed(CalculatorButtonType.two)
+          ..onPressed(CalculatorButtonType.equal)
+          ..onPressed(CalculatorButtonType.five);
+
+        expect(model.display, '5');
+        expect(model.subDisplay, '');
+      });
     });
 
     group('Addition test', () {
