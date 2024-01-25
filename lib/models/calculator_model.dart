@@ -6,24 +6,29 @@ class CalculatorModel {
   CalculatorButtonType? _operatorType;
   String _operand1 = '0';
   String _operand2 = '';
-  bool _isEqualed = false;
+  bool _isErorr = false;
 
+  CalculatorButtonType _lastPressed = CalculatorButtonType.ac;
+
+  bool get _isEqualed => _lastPressed == CalculatorButtonType.equal;
   String get _operator => _operatorType?.text ?? '';
   String get _equal => _isEqualed ? '=' : '';
-  String get display => _result;
+  String get display => isError ? 'ERROR' : _result;
   String get subDisplay =>
       _operator.isEmpty ? '' : _operand1 + _operator + _operand2 + _equal;
+  bool get isError => _isErorr;
 
   void onPressed(CalculatorButtonType buttonType) {
-    // TODO(sukeroku): implement buttonPressed
+    _lastPressed = buttonType;
+
     return switch (buttonType) {
       CalculatorButtonType.ac => _onAc(),
-      CalculatorButtonType.percent => null,
+      CalculatorButtonType.percent => _onPercent(),
       CalculatorButtonType.divide => _onOperator(buttonType),
       CalculatorButtonType.multiply => _onOperator(buttonType),
       CalculatorButtonType.subtract => _onOperator(buttonType),
       CalculatorButtonType.add => _onOperator(buttonType),
-      CalculatorButtonType.dot => null,
+      CalculatorButtonType.dot => _onDot(),
       CalculatorButtonType.equal => _onEqual(),
       CalculatorButtonType.zero => _onNumber(buttonType),
       CalculatorButtonType.one => _onNumber(buttonType),
@@ -35,7 +40,7 @@ class CalculatorModel {
       CalculatorButtonType.seven => _onNumber(buttonType),
       CalculatorButtonType.eight => _onNumber(buttonType),
       CalculatorButtonType.nine => _onNumber(buttonType),
-      CalculatorButtonType.plusOrMinus => null,
+      CalculatorButtonType.plusOrMinus => _onPlusOrMinus(),
     };
   }
 
@@ -44,7 +49,6 @@ class CalculatorModel {
     _operand1 = '0';
     _operatorType = null;
     _operand2 = '';
-    _isEqualed = false;
   }
 
   void _onNumber(CalculatorButtonType buttonType) {
@@ -66,13 +70,16 @@ class CalculatorModel {
   }
 
   void _onOperator(CalculatorButtonType buttonType) {
-    _isEqualed = false;
-
     _operatorType = buttonType;
   }
 
+  void _onDot() {}
+
+  void _onPercent() {}
+
+  void _onPlusOrMinus() {}
+
   void _onEqual() {
-    _isEqualed = true;
     _operand1 = _result;
 
     final op1 = Decimal.parse(_result);

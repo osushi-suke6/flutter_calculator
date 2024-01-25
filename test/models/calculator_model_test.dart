@@ -21,6 +21,7 @@ void main() {
         ..onPressed(CalculatorButtonType.zero);
 
       expect(calculator.display, '1234567890');
+      expect(calculator.subDisplay, '');
     });
 
     group('Addition test', () {
@@ -33,6 +34,7 @@ void main() {
           ..onPressed(CalculatorButtonType.equal);
 
         expect(calculator.display, '13');
+        expect(calculator.subDisplay, '5+8=');
       });
 
       test('0.1 + 0.2 = 0.3', () {
@@ -48,6 +50,7 @@ void main() {
           ..onPressed(CalculatorButtonType.equal);
 
         expect(calculator.display, '0.3');
+        expect(calculator.subDisplay, '0.1+0.2=');
       });
     });
 
@@ -65,6 +68,7 @@ void main() {
           ..onPressed(CalculatorButtonType.equal);
 
         expect(calculator.display, '0.1');
+        expect(calculator.subDisplay, '0.2-0.1=');
       });
     });
 
@@ -82,6 +86,7 @@ void main() {
           ..onPressed(CalculatorButtonType.equal);
 
         expect(calculator.display, '0.02');
+        expect(calculator.subDisplay, '0.2×0.1=');
       });
     });
 
@@ -99,23 +104,59 @@ void main() {
           ..onPressed(CalculatorButtonType.equal);
 
         expect(calculator.display, '2');
+        expect(calculator.subDisplay, '0.2/0.1=');
       });
     });
 
-    test('The display should show 0 if the AC button is pressed', () {
-      calculator
-        ..onPressed(CalculatorButtonType.ac)
-        ..onPressed(CalculatorButtonType.zero)
-        ..onPressed(CalculatorButtonType.dot)
-        ..onPressed(CalculatorButtonType.two)
-        ..onPressed(CalculatorButtonType.subtract)
-        ..onPressed(CalculatorButtonType.zero)
-        ..onPressed(CalculatorButtonType.dot)
-        ..onPressed(CalculatorButtonType.one)
-        ..onPressed(CalculatorButtonType.ac);
+    group('AC test', () {
+      test('The display should show 0 if the AC button is pressed: case1', () {
+        calculator
+          ..onPressed(CalculatorButtonType.ac)
+          ..onPressed(CalculatorButtonType.two)
+          ..onPressed(CalculatorButtonType.ac);
 
-      expect(calculator.display, equals('0'));
-      expect(calculator.subDisplay, equals(''));
+        expect(calculator.display, '0');
+        expect(calculator.isError, false);
+      });
+
+      test('The display should show 0 if the AC button is pressed: case2', () {
+        calculator
+          ..onPressed(CalculatorButtonType.ac)
+          ..onPressed(CalculatorButtonType.one)
+          ..onPressed(CalculatorButtonType.multiply)
+          ..onPressed(CalculatorButtonType.ac);
+
+        expect(calculator.display, '0');
+        expect(calculator.isError, false);
+      });
+
+      test('The display should show 0 if the AC button is pressed: case3', () {
+        calculator
+          ..onPressed(CalculatorButtonType.ac)
+          ..onPressed(CalculatorButtonType.three)
+          ..onPressed(CalculatorButtonType.divide)
+          ..onPressed(CalculatorButtonType.four)
+          ..onPressed(CalculatorButtonType.ac);
+
+        expect(calculator.display, '0');
+        expect(calculator.isError, false);
+      });
+
+      test('The display should show 0 if the AC button is pressed: case4', () {
+        calculator
+          ..onPressed(CalculatorButtonType.ac)
+          ..onPressed(CalculatorButtonType.three)
+          ..onPressed(CalculatorButtonType.divide)
+          ..onPressed(CalculatorButtonType.zero)
+          ..onPressed(CalculatorButtonType.ac);
+
+        expect(calculator.display, '0');
+        expect(calculator.isError, false);
+      });
+    });
+
+    group('Equal test', () {
+      test('description', () {});
     });
   });
 }
