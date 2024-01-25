@@ -17,8 +17,19 @@ class CalculatorView extends StatelessWidget {
         height: 100,
         padding: const EdgeInsets.symmetric(horizontal: 25),
         child: Text(
-          viewModel.result,
+          viewModel.display,
           style: const TextStyle(color: Colors.white, fontSize: 64),
+        ),
+      );
+
+      final subDisplay = Container(
+        alignment: Alignment.centerRight,
+        width: 400,
+        height: 50,
+        padding: const EdgeInsets.symmetric(horizontal: 25),
+        child: Text(
+          viewModel.subDisplay,
+          style: const TextStyle(color: Colors.white, fontSize: 32),
         ),
       );
 
@@ -27,6 +38,7 @@ class CalculatorView extends StatelessWidget {
       return Center(
         child: Column(
           children: [
+            subDisplay,
             display,
             buttons,
           ],
