@@ -89,8 +89,17 @@ class CalculatorModel {
       CalculatorButtonType.add => (op1 + op2).toString(),
       CalculatorButtonType.subtract => (op1 - op2).toString(),
       CalculatorButtonType.multiply => (op1 * op2).toString(),
-      CalculatorButtonType.divide => (op1 / op2).toString(),
+      CalculatorButtonType.divide => _divide(op1, op2),
       _ => ''
     };
+  }
+
+  String _divide(Decimal op1, Decimal op2) {
+    if (op2 == Decimal.zero) {
+      _isError = true;
+      return '';
+    }
+
+    return (op1 / op2).toString();
   }
 }

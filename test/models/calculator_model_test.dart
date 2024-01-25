@@ -173,5 +173,29 @@ void main() {
     group('Equal test', () {
       test('description', () {});
     });
+
+    group('Operator buttons test', () {
+      test('+ should set + operator', () {
+        final model = CalculatorModel()..onPressed(CalculatorButtonType.add);
+        expect(model.subDisplay.endsWith('+'), true);
+      });
+
+      test('- should set - operator', () {
+        final model = CalculatorModel()
+          ..onPressed(CalculatorButtonType.subtract);
+        expect(model.subDisplay.endsWith('-'), true);
+      });
+
+      test('× should set × operator', () {
+        final model = CalculatorModel()
+          ..onPressed(CalculatorButtonType.multiply);
+        expect(model.subDisplay.endsWith('×'), true);
+      });
+
+      test('÷ should set ÷ operator', () {
+        final model = CalculatorModel()..onPressed(CalculatorButtonType.divide);
+        expect(model.subDisplay.endsWith('÷'), true);
+      });
+    });
   });
 }
