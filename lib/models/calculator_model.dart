@@ -6,7 +6,7 @@ class CalculatorModel {
   CalculatorButtonType? _operatorType;
   String _operand1 = '0';
   String _operand2 = '';
-  bool _isErorr = false;
+  bool _isError = false;
 
   CalculatorButtonType _lastPressed = CalculatorButtonType.ac;
 
