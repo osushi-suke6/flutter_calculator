@@ -4,11 +4,8 @@ import 'package:test/test.dart';
 
 void main() {
   group('Test CalculatorModel', () {
-    final calculator = CalculatorModel();
-
     test('Numeric input test', () {
-      calculator
-        ..onPressed(CalculatorButtonType.ac)
+      final model = CalculatorModel()
         ..onPressed(CalculatorButtonType.one)
         ..onPressed(CalculatorButtonType.two)
         ..onPressed(CalculatorButtonType.three)
@@ -20,26 +17,24 @@ void main() {
         ..onPressed(CalculatorButtonType.nine)
         ..onPressed(CalculatorButtonType.zero);
 
-      expect(calculator.display, '1234567890');
-      expect(calculator.subDisplay, '');
+      expect(model.display, '1234567890');
+      expect(model.subDisplay, '');
     });
 
     group('Addition test', () {
       test('5 + 8 = 13', () {
-        calculator
-          ..onPressed(CalculatorButtonType.ac)
+        final model = CalculatorModel()
           ..onPressed(CalculatorButtonType.five)
           ..onPressed(CalculatorButtonType.add)
           ..onPressed(CalculatorButtonType.eight)
           ..onPressed(CalculatorButtonType.equal);
 
-        expect(calculator.display, '13');
-        expect(calculator.subDisplay, '5+8=');
+        expect(model.display, '13');
+        expect(model.subDisplay, '5+8=');
       });
 
       test('0.1 + 0.2 = 0.3', () {
-        calculator
-          ..onPressed(CalculatorButtonType.ac)
+        final model = CalculatorModel()
           ..onPressed(CalculatorButtonType.zero)
           ..onPressed(CalculatorButtonType.dot)
           ..onPressed(CalculatorButtonType.one)
@@ -49,15 +44,14 @@ void main() {
           ..onPressed(CalculatorButtonType.two)
           ..onPressed(CalculatorButtonType.equal);
 
-        expect(calculator.display, '0.3');
-        expect(calculator.subDisplay, '0.1+0.2=');
+        expect(model.display, '0.3');
+        expect(model.subDisplay, '0.1+0.2=');
       });
     });
 
     group('Subtraction test', () {
       test('0.2 - 0.1 = 0.1', () {
-        calculator
-          ..onPressed(CalculatorButtonType.ac)
+        final model = CalculatorModel()
           ..onPressed(CalculatorButtonType.zero)
           ..onPressed(CalculatorButtonType.dot)
           ..onPressed(CalculatorButtonType.two)
@@ -67,15 +61,14 @@ void main() {
           ..onPressed(CalculatorButtonType.one)
           ..onPressed(CalculatorButtonType.equal);
 
-        expect(calculator.display, '0.1');
-        expect(calculator.subDisplay, '0.2-0.1=');
+        expect(model.display, '0.1');
+        expect(model.subDisplay, '0.2-0.1=');
       });
     });
 
     group('Multiplication test', () {
       test('0.2 * 0.1 = 0.02', () {
-        calculator
-          ..onPressed(CalculatorButtonType.ac)
+        final model = CalculatorModel()
           ..onPressed(CalculatorButtonType.zero)
           ..onPressed(CalculatorButtonType.dot)
           ..onPressed(CalculatorButtonType.two)
@@ -85,15 +78,14 @@ void main() {
           ..onPressed(CalculatorButtonType.one)
           ..onPressed(CalculatorButtonType.equal);
 
-        expect(calculator.display, '0.02');
-        expect(calculator.subDisplay, '0.2×0.1=');
+        expect(model.display, '0.02');
+        expect(model.subDisplay, '0.2×0.1=');
       });
     });
 
     group('Division test', () {
       test('0.2 / 0.1 = 2', () {
-        calculator
-          ..onPressed(CalculatorButtonType.ac)
+        final model = CalculatorModel()
           ..onPressed(CalculatorButtonType.zero)
           ..onPressed(CalculatorButtonType.dot)
           ..onPressed(CalculatorButtonType.two)
@@ -103,13 +95,12 @@ void main() {
           ..onPressed(CalculatorButtonType.one)
           ..onPressed(CalculatorButtonType.equal);
 
-        expect(calculator.display, '2');
-        expect(calculator.subDisplay, '0.2/0.1=');
+        expect(model.display, '2');
+        expect(model.subDisplay, '0.2/0.1=');
       });
 
       test('The display should show ERROR on Division by zero', () {
-        calculator
-          ..onPressed(CalculatorButtonType.ac)
+        final model = CalculatorModel()
           ..onPressed(CalculatorButtonType.zero)
           ..onPressed(CalculatorButtonType.dot)
           ..onPressed(CalculatorButtonType.two)
@@ -117,56 +108,52 @@ void main() {
           ..onPressed(CalculatorButtonType.zero)
           ..onPressed(CalculatorButtonType.equal);
 
-        expect(calculator.isError, true);
-        expect(calculator.display, 'ERROR');
-        expect(calculator.subDisplay, '0.2/0=');
+        expect(model.isError, true);
+        expect(model.display, 'ERROR');
+        expect(model.subDisplay, '0.2/0=');
       });
     });
 
     group('AC test', () {
       test('The display should show 0 if the AC button is pressed: case1', () {
-        calculator
-          ..onPressed(CalculatorButtonType.ac)
+        final model = CalculatorModel()
           ..onPressed(CalculatorButtonType.two)
           ..onPressed(CalculatorButtonType.ac);
 
-        expect(calculator.display, '0');
-        expect(calculator.isError, false);
+        expect(model.display, '0');
+        expect(model.isError, false);
       });
 
       test('The display should show 0 if the AC button is pressed: case2', () {
-        calculator
-          ..onPressed(CalculatorButtonType.ac)
+        final model = CalculatorModel()
           ..onPressed(CalculatorButtonType.one)
           ..onPressed(CalculatorButtonType.multiply)
           ..onPressed(CalculatorButtonType.ac);
 
-        expect(calculator.display, '0');
-        expect(calculator.isError, false);
+        expect(model.display, '0');
+        expect(model.isError, false);
       });
 
       test('The display should show 0 if the AC button is pressed: case3', () {
-        calculator
-          ..onPressed(CalculatorButtonType.ac)
+        final model = CalculatorModel()
           ..onPressed(CalculatorButtonType.three)
           ..onPressed(CalculatorButtonType.divide)
           ..onPressed(CalculatorButtonType.four)
           ..onPressed(CalculatorButtonType.ac);
 
-        expect(calculator.display, '0');
-        expect(calculator.isError, false);
+        expect(model.display, '0');
+        expect(model.isError, false);
       });
 
       test('The display should show 0 if the AC button is pressed: case4', () {
-        calculator
-          ..onPressed(CalculatorButtonType.ac)
+        final model = CalculatorModel()
           ..onPressed(CalculatorButtonType.three)
           ..onPressed(CalculatorButtonType.divide)
           ..onPressed(CalculatorButtonType.zero)
           ..onPressed(CalculatorButtonType.ac);
 
-        expect(calculator.display, '0');
-        expect(calculator.isError, false);
+        expect(model.display, '0');
+        expect(model.isError, false);
       });
     });
 
