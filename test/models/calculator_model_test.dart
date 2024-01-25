@@ -125,13 +125,11 @@ void main() {
           ..onPressed(CalculatorButtonType.equal);
 
         expect(model.display, '2');
-        expect(model.subDisplay, '0.2/0.1=');
+        expect(model.subDisplay, '0.2÷0.1=');
       });
 
       test('The display should show ERROR on division by zero', () {
         final model = CalculatorModel()
-          ..onPressed(CalculatorButtonType.zero)
-          ..onPressed(CalculatorButtonType.dot)
           ..onPressed(CalculatorButtonType.two)
           ..onPressed(CalculatorButtonType.divide)
           ..onPressed(CalculatorButtonType.zero)
@@ -139,7 +137,7 @@ void main() {
 
         expect(model.isError, true);
         expect(model.display, 'ERROR');
-        expect(model.subDisplay, '0.2/0=');
+        expect(model.subDisplay, '2÷0=');
       });
     });
 
@@ -231,6 +229,29 @@ void main() {
 
         expect(model.display, '6');
         expect(model.subDisplay, '6-');
+      });
+    });
+
+    group('Equal test', () {
+      test('The display should show result if the expression is set', () {
+        final model = CalculatorModel()
+          ..onPressed(CalculatorButtonType.two)
+          ..onPressed(CalculatorButtonType.multiply)
+          ..onPressed(CalculatorButtonType.equal);
+
+        expect(model.display, '4');
+        expect(model.subDisplay, '2×2=');
+      });
+
+      test('Pressing equal twice should repeat the last operation', () {
+        final model = CalculatorModel()
+          ..onPressed(CalculatorButtonType.two)
+          ..onPressed(CalculatorButtonType.multiply)
+          ..onPressed(CalculatorButtonType.equal)
+          ..onPressed(CalculatorButtonType.equal);
+
+        expect(model.display, '8');
+        expect(model.subDisplay, '4×2=');
       });
     });
   });

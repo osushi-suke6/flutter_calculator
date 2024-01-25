@@ -4,7 +4,7 @@ import 'package:flutter_calculator/utils/calculator_button_type.dart';
 class CalculatorModel {
   String _result = '0';
   CalculatorButtonType? _operatorType;
-  String _operand1 = '0';
+  String _operand1 = '';
   String _operand2 = '';
   bool _isError = false;
 
@@ -19,8 +19,11 @@ class CalculatorModel {
   bool get isError => _isError;
 
   void onPressed(CalculatorButtonType buttonType) {
+    _handlePressed(buttonType);
     _lastPressed = buttonType;
+  }
 
+  void _handlePressed(CalculatorButtonType buttonType) {
     return switch (buttonType) {
       CalculatorButtonType.ac => _onAc(),
       CalculatorButtonType.percent => _onPercent(),
@@ -44,9 +47,16 @@ class CalculatorModel {
     };
   }
 
+  bool _isUpdateOperand() {
+    return _lastPressed.isOperator ||
+        _lastPressed == CalculatorButtonType.equal ||
+        _result == '0';
+  }
+
   void _onAc() {
+    _isError = false;
     _result = '0';
-    _operand1 = '0';
+    _operand1 = '';
     _operatorType = null;
     _operand2 = '';
   }
@@ -54,35 +64,52 @@ class CalculatorModel {
   void _onNumber(CalculatorButtonType buttonType) {
     final number = buttonType.text;
 
-    if (_isEqualed) {
-      _onAc();
-      _operand1 = number;
-      _result = _operand1;
-    } else if (_operatorType != null) {
-      _operand2 += number;
-    } else if (_operand1 == '0') {
-      _operand1 = number;
-      _result = _operand1;
+    if (_lastPressed == CalculatorButtonType.equal) _onAc();
+
+    if (_isUpdateOperand()) {
+      _result = number;
     } else {
-      _operand1 += number;
-      _result = _operand1;
+      _result += number;
     }
   }
 
   void _onOperator(CalculatorButtonType buttonType) {
+    if (_lastPressed.isOperator) {
+      _operatorType = buttonType;
+      return;
+    }
+
+    if (_operand1.isEmpty) {
+      _operand1 = _result;
+    } else {
+      _onEqual();
+      _operand1 = _result;
+      _operand2 = '';
+    }
+
     _operatorType = buttonType;
   }
 
-  void _onDot() {}
+  void _onDot() {
+    if (_result.contains('.')) return;
+
+    _result += '.';
+  }
 
   void _onPercent() {}
 
   void _onPlusOrMinus() {}
 
   void _onEqual() {
-    _operand1 = _result;
+    if (_operand1.isEmpty && _operand2.isEmpty) return;
 
-    final op1 = Decimal.parse(_result);
+    if (_lastPressed == CalculatorButtonType.equal) {
+      _operand1 = _result;
+    } else {
+      _operand2 = _result;
+    }
+
+    final op1 = Decimal.parse(_operand1);
     final op2 = Decimal.parse(_operand2);
 
     _result = switch (_operatorType) {
