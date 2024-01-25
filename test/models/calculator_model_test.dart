@@ -190,27 +190,51 @@ void main() {
       test('description', () {});
     });
 
-    group('Operator buttons test', () {
+    group('Operator input test', () {
       test('+ should set + operator', () {
         final model = CalculatorModel()..onPressed(CalculatorButtonType.add);
+
         expect(model.subDisplay.endsWith('+'), true);
       });
 
       test('- should set - operator', () {
         final model = CalculatorModel()
           ..onPressed(CalculatorButtonType.subtract);
+
         expect(model.subDisplay.endsWith('-'), true);
       });
 
       test('× should set × operator', () {
         final model = CalculatorModel()
           ..onPressed(CalculatorButtonType.multiply);
+
         expect(model.subDisplay.endsWith('×'), true);
       });
 
       test('÷ should set ÷ operator', () {
         final model = CalculatorModel()..onPressed(CalculatorButtonType.divide);
+
         expect(model.subDisplay.endsWith('÷'), true);
+      });
+
+      test('Operator input should replace the previous operator', () {
+        final model = CalculatorModel()
+          ..onPressed(CalculatorButtonType.three)
+          ..onPressed(CalculatorButtonType.divide)
+          ..onPressed(CalculatorButtonType.multiply);
+
+        expect(model.subDisplay.endsWith('×'), true);
+      });
+
+      test('Operator input should show result if the expression is set', () {
+        final model = CalculatorModel()
+          ..onPressed(CalculatorButtonType.three)
+          ..onPressed(CalculatorButtonType.add)
+          ..onPressed(CalculatorButtonType.three)
+          ..onPressed(CalculatorButtonType.subtract);
+
+        expect(model.display, '6');
+        expect(model.subDisplay, '6-');
       });
     });
   });
