@@ -186,10 +186,6 @@ void main() {
       });
     });
 
-    group('Equal test', () {
-      test('description', () {});
-    });
-
     group('Operator input test', () {
       test('+ should set + operator', () {
         final model = CalculatorModel()..onPressed(CalculatorButtonType.add);
