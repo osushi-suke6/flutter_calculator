@@ -251,4 +251,31 @@ void main() {
       expect(model.subDisplay, '4×2=');
     });
   });
+
+  group('+/- test', () {
+    test('+/- should turn the positive number into negative', () {
+      final model = CalculatorModel()
+        ..onPressed(CalculatorButtonType.five)
+        ..onPressed(CalculatorButtonType.plusOrMinus);
+
+      expect(model.display, '-5');
+    });
+
+    test('+/- should turn the negative number into positive', () {
+      final model = CalculatorModel()
+        ..onPressed(CalculatorButtonType.five)
+        ..onPressed(CalculatorButtonType.plusOrMinus)
+        ..onPressed(CalculatorButtonType.plusOrMinus);
+
+      expect(model.display, '5');
+    });
+
+    test('+/- should not turn zero into positive or negative', () {
+      final model = CalculatorModel()
+        ..onPressed(CalculatorButtonType.zero)
+        ..onPressed(CalculatorButtonType.plusOrMinus);
+
+      expect(model.display, '0');
+    });
+  });
 }
