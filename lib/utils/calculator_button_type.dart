@@ -42,4 +42,12 @@ extension CalculatorButtonTypeExtension on CalculatorButtonType {
         CalculatorButtonType.nine => '9',
         CalculatorButtonType.plusOrMinus => '+/-',
       };
+
+  bool get isOperator => switch (this) {
+        CalculatorButtonType.add => true,
+        CalculatorButtonType.subtract => true,
+        CalculatorButtonType.multiply => true,
+        CalculatorButtonType.divide => true,
+        _ => false,
+      };
 }
