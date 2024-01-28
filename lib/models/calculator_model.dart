@@ -98,7 +98,10 @@ class CalculatorModel {
 
   void _onPercent() {}
 
-  void _onPlusOrMinus() {}
+  void _onPlusOrMinus() {
+    final result = -Decimal.parse(_result);
+    _result = result.toString();
+  }
 
   void _onEqual() {
     if (_operand1.isEmpty && _operand2.isEmpty) return;
